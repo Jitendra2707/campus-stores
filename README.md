@@ -33,51 +33,94 @@ Icon license notices are in [third-party/lucide-LICENSE.txt](third-party/lucide-
 
 ---
 
-## My work
+## My Work
 
-<!-- DRAFT: rewrite this section in your own words, using what you saw on your own shift. -->
+### What the product does well
 
-### One moment the product handles well: the issue slip refuses the wrong kit
+When I issued Kabir’s kit for the Film Society, I tried adding an item that wasn't part of the approved request, but the app didn't allow it. It also stopped me from issuing a second projector and didn't show the projector that was already in the workshop for repair. This makes it much easier to avoid issuing the wrong items.
 
-At 3:45 pm, while issuing Kabir's kit for RQ-214, I tried to issue something the request didn't approve and then a second unit of a type already out. Both were refused. The projector in the workshop (PR-06) never appears as an option. Because there is **one slip per physical unit**, the partial return later on has a natural shape: the projector and speaker slips can close while the adapter slip stays open.
+Another thing I liked was that every item had its own slip. This was useful when Kabir returned only part of the kit. I could close the projector and speaker slips while keeping the adapter slip open.
 
-**Keep:** request-bound issuing, one slip per unit, units in repair hidden.
+I would definitely keep these features.
 
-### One moment I would change: the adapter that didn't come back
+### What I would change
 
-At 7:30 pm Kabir returned two of three items and said Leela had the adapter until 9 am. In the original app I could only:
+The main problem came up during the return process.
 
-- click **Record return** on each slip (one click, no confirmation, no undo, no record of who brought it back), and
-- leave the adapter slip saying *Kabir Sen · Due Fri 8 pm*, writing "Leela has it, back 9 am" as free text in the Desk book, on a different tab and not linked to the slip.
+Kabir returned the projector and speaker but told me that Leela had the adapter and would return it the next morning at 9 am. However, there was no option in the app to record this information against the adapter slip.
 
-At 9 am the morning shift sees an **overdue slip in Kabir's name** while **Leela** stands at the counter holding *an* adapter. Register rows show only `L-404 · AD-12`, not what the item is. There are two identical adapters in bin C4 (AD-12, AD-15), and Tara's microphone slip is open too. Closing the right slip depends on someone reading yesterday's note and cross-checking Inventory by hand.
+The slip still showed "Kabir Sen, due Fri 8 pm". The only way to record that Leela had the adapter was to write it in the Desk book, which is in a separate tab and isn't connected to the loan slip.
 
-### The change (prototype)
+This became more confusing during the morning shift. I could see an overdue slip under Kabir's name, but Leela was the one returning the item. The register only showed `L-404 · AD-12`, without clearly displaying the item details.
 
-1. **Take return per kit.** The register groups slips by request. **Take return** opens one form that makes you mark *every* unit as **Back at the desk** or **Still out**. For anything still out you must say **who has it now** and **when it's expected back**. The slip is updated (holder → Leela, due → Sat 9 am), and a handover note **linked to the slip** is written to the Desk book automatically.
-2. **Check in from the item in hand.** At the top of the register: type or scan the asset tag. A tag on loan shows its slip, holder, expected time and history, with a **Confirm AD-12 is back** button. A tag that isn't on loan (e.g. AD-15) gets a warning that names the adapter that *is* still out, so nobody closes the wrong slip.
-3. **Every slip shows what it is and what happened to it**: type, model, home bin, current holder, and a short history.
-4. **Undo** the last return or check-in from the status bar.
+There were also two identical adapters in the same bin (AD-12 and AD-15), and Tara's microphone slip was still open. I had to check the Desk book and Inventory separately just to make sure I was closing the correct slip. This made it quite easy to make a mistake.
 
-### Same job, using the prototype
+Another issue was that clicking "Record return" immediately closed the slip without asking for confirmation or providing an undo option.
 
-| Time | What I do |
-| --- | --- |
-| Fri 3:45 pm | Issue PR-04, SP-02, AD-12 to Kabir (unchanged). |
-| Fri 7:30 pm | Loan register → RQ-214 **Take return**. Brought in by Kabir. Projector: back. Speaker: back. Adapter: still out, with **Leela Das**, expected **Sat 9 am**. Save. The slip now reads "With Leela Das · back by Sat 9 am · issued to Kabir Sen", and the desk book has a linked note. |
-| Sat 9:00 am | Read the tag on the adapter Leela hands over and type it in. `AD-12` → slip L-404 → **Confirm AD-12 is back**. If it were `AD-15`, the app says it isn't on loan and that the open adapter slip is AD-12 with Leela. |
+### My proposed changes
 
-### What I kept
+I decided to improve the Loan register by focusing on making partial returns easier to manage and reducing the chances of closing the wrong slip.
 
-Everything from the issue flow, one slip per unit, the Desk book for free-text messages, and the layout.
+#### 1. Return the entire kit together
 
-### Not done (on purpose)
+Instead of handling each slip separately, staff can now open one return screen for the whole request.
 
-The issue flow still takes three separate slips, and **Collected by** isn't checked against Isha's note authorizing Kabir. Both are real problems, but I kept the change to one moment.
+For every item, they can select either "Back at the desk" or "Still out". If an item is still out, they must enter who currently has it and when it is expected back.
 
-### One observation at a real counter
+For example, the adapter slip would show:
 
-On the morning after a partial return, watch the first check-in: **does the person at the counter close the right slip without opening the Desk book or Inventory?** Count wrong closures and lookups in other tabs before and after the change.
+> "With Leela Das, back by Sat 9 am."
+
+The same information would automatically be added to the Desk book and linked to the relevant slip. This removes the need to write the same information twice.
+
+#### 2. Check returns using the item's tag
+
+When someone returns an item, staff can simply enter the tag printed on it.
+
+For example, if I enter AD-12, the app will show the correct loan slip so I can check and confirm the return.
+
+If I accidentally enter AD-15, the app will tell me that AD-15 isn't currently on loan. It will also show that AD-12 is the adapter that is actually out and is currently with Leela.
+
+This makes it easier to identify the correct item without checking Inventory separately.
+
+#### 3. Make loan slips easier to understand
+
+Each slip should clearly display the item name, model, bin location, current holder and return status.
+
+This way, staff don't have to guess what an item tag represents or search through different sections of the app.
+
+#### 4. Add an undo option
+
+I would also add an undo option for the most recent return. This would help staff correct mistakes if they accidentally confirm the wrong item.
+
+### How the improved process would work
+
+- **Friday, 3:45 pm:** I issue the projector, speaker and adapter to Kabir, just as I did before.
+- **Friday, 7:30 pm:** Kabir returns the projector and speaker. I open the Film Society's return screen and mark both items as "Back at the desk". For the adapter, I select "Still out", enter Leela's name and set the expected return time as Saturday at 9 am. The adapter slip updates automatically, and the handover information is also added to the Desk book.
+- **Saturday, 9 am:** Leela comes to return the adapter. I enter its tag, AD-12, and the app immediately shows the correct loan slip. I check the details and confirm the return.
+
+That's it. I don't need to open the Desk book or search through Inventory to find the correct slip.
+
+### What I haven't changed
+
+I haven't changed the existing issuing process. Staff still need to create separate slips for each item.
+
+Another issue is that the app doesn't verify whether Kabir is authorised to collect items on behalf of Isha. That permission is currently recorded only in a Desk book message.
+
+These are also worth improving, but I decided to focus on one specific problem first: making partial returns and shift handovers safer and easier.
+
+### How I would measure whether it works
+
+I would test this at an actual counter, especially during the morning shift after a partial return.
+
+I would observe whether staff can identify and close the correct slip without first checking the Desk book or Inventory.
+
+To understand whether the change has actually helped, I would compare two things before and after the update:
+
+- How many times staff accidentally close the wrong slip.
+- How often staff need to switch between the Loan register, Desk book and Inventory to complete a return.
+
+If both numbers decrease, it would be a good indication that the new process is making returns simpler and reducing mistakes.
 
 ### Run it
 
